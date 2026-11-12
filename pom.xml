@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.github.davidsmith</groupId>
-	<artifactId>spring-boot-tech-test-base</artifactId>
+	<artifactId>phorest-techtest-david-smith</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>
