@@ -14,8 +14,17 @@ sh mvnw clean verify
 ```
 
 ### Server
+#### Maven
 ```shell
 sh mvnw spring-boot:run
+```
+
+#### Docker
+When running by docker ensure the application has been build first:
+```shell
+sh mvnw clean compile jar:jar spring-boot:repackage
+docker build . -t phorest-techtest/david-smith
+docker run -p 8080:8080 phorest-techtest/david-smith
 ```
 
 ### Instructions for endpoints
