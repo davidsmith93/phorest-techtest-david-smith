@@ -4,14 +4,55 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:8080
-tags:
-  - name: <TODO>
-    summary: <TODO>
-    description: <TODO>
 paths:
-
+  /api/machines/{id}/spins:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: x-version
+        in: header
+        schema:
+          type: number
+          value: 1
+        required: true
+    post:
+      requestBody:
+        content:
+          application/json:
+      responses:
+        "200":
+          description: A successful spin including the column results and the outcome
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MachineSpinResult'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    MachineSpinResult:
+      properties:
+        columns:
+          type: array
+          items:
+            type: string
+            examples:
+              - BLACK
+              - WHITE
+              - GREEN
+              - YELLOW
+        outcome:
+          type: string
+          enum:
+            - JACKPOT
+            - NO_WIN
     ErrorResponse:
       properties:
         code:
