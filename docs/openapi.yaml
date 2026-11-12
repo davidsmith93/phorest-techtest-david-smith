@@ -39,7 +39,7 @@ components:
   schemas:
     MachineSpinResult:
       properties:
-        columns:
+        slots:
           type: array
           items:
             type: string
@@ -52,7 +52,7 @@ components:
           type: string
           enum:
             - JACKPOT
-            - NO_WIN
+            - LOSS
     ErrorResponse:
       properties:
         code:

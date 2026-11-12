@@ -10,6 +10,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class MachineSpinsResult {
-    private List<String> columns;
+    private List<String> slots;
     private String outcome;
 }
