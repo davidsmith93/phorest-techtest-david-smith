@@ -1,5 +1,6 @@
 package com.github.davidsmith.techtest.remote.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +18,7 @@ public class UserSpinsEntity extends PersistableEntity<UserSpinsEntity.Identifie
 
     @Data
     @Builder
+    @AllArgsConstructor
     public static class Identifier {
         private Integer userId;
         private Integer fruitMachineId;

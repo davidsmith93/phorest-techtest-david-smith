@@ -18,7 +18,7 @@ Phase 1 will contain the following:
 
 ## Phase 2
 Phase 2 will contain the following:
-- A In memory PostgreSql databases
+- An In memory PostgreSql databases
   - This will be run via test containers for simplicity
   - The machine configuration will be moved here
   - A user will be created which will keep track of the free spins for that user
@@ -33,10 +33,15 @@ Phase 2 will contain the following:
 - The conditions for FULL_HOUSE payout are vague. For a real implementation I would delegate to product to determine the outcome. The following assumptions are being made:
   - When the number of columns do not match the number of possible colours
     - If there are more columns than colours, we just need to see all the colours
-    - If there are less columns than colours, then every column needs to be unique
+    - If there are fewer columns than colours, then every column needs to be unique
   - When the number of columns do match the number of possible colours
     - All colours must be present
+- When multiple payouts are achieved, only the first is taken into consideration, based on the ordering of JACKPOT > FULL_HOUSE > SMALL_PRIZE
+- When a request to spin is made using a free spin, and the machine is empty, validation kicks in to fail the call
 
 ## Phase 3
+Phase 3 will contain the following:
+- A docker-compose with a standalone PostgreSql database
+- Endpoints to create, configure and view a fruit machine
+
 ### Assumptions
-- When multiple payouts are achieved, only the first is taken into consideration, based on the ordering of JACKPOT > FULL_HOUSE > SMALL_PRIZE

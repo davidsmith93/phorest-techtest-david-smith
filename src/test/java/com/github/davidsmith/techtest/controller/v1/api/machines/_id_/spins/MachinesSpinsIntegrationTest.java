@@ -114,6 +114,7 @@ public class MachinesSpinsIntegrationTest {
         RequestBuilder createRequest() {
             return MockMvcRequestBuilders.post("/api/machines/1/spins")
                 .header("x-version", "1")
+                .header("x-user", "2")
                 .contentType(MediaType.APPLICATION_JSON);
         }
 

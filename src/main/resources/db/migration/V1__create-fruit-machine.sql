@@ -1,10 +1,8 @@
-CREATE TYPE fruit_machine_type AS ENUM ('RANDOM');
-
 CREATE TABLE fruit_machines (
     id BIGINT PRIMARY KEY,
     colours TEXT[] NOT NULL,
     number_of_slots SMALLINT NOT NULL,
-    spin_type fruit_machine_type NOT NULL,
+    spin_type VARCHAR NOT NULL,
     float_in_pence BIGINT NOT NULL,
     spin_price_in_pence BIGINT NOT NULL,
     small_prize_adjacency INT NOT NULL
