@@ -52,7 +52,15 @@ components:
           type: string
           enum:
             - JACKPOT
+            - FULL_HOUSE
+            - SMALL_PRIZE
             - LOSS
+        payoutInPence:
+          type: number
+        balanceInPence:
+          type: number
+        freeSpinsAwarded:
+          type: number
     ErrorResponse:
       properties:
         code:

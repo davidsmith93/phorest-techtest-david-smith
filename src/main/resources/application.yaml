@@ -2,12 +2,9 @@ spring:
   application:
     name: tech-test
   datasource:
-    url: jdbc:h2:mem:tech-test;MODE=PostgreSQL;
+    url: jdbc:tc:postgresql:9.5.8:///techtest;
     username: username
     password: password
-    driverClassName: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
 
 # H2 Console - visit http://localhost:8080/h2-console
   h2:
