@@ -33,7 +33,7 @@ public class SpinService {
         final SlotSpinner slotSpinner = slotSpinnerFactory.create(machine);
 
         final List<String> slots = slotSpinner.spin();
-        final SpinOutcome outcome = compositeOutcomeEvaluator.evaluate(slots);
+        final SpinOutcome outcome = compositeOutcomeEvaluator.evaluate(machine, slots);
 
         log.info("Finished spin: slots {}, outcome: {}", slots, outcome);
 

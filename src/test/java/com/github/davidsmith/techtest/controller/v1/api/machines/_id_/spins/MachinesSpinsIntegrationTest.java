@@ -52,7 +52,27 @@ public class MachinesSpinsIntegrationTest {
         }
 
         @Test
-        void returnsExpectedResult_whenLoss() throws Exception {
+        void returnsExpectedResult_whenFullHouse() throws Exception {
+            final SlotSpinner slotSpinner = Mockito.mock();
+
+            Mockito.doReturn(slotSpinner)
+                .when(slotSpinnerFactory)
+                .create(Mockito.any());
+
+            Mockito.doReturn(List.of("BLACK", "GREEN", "YELLOW", "WHITE"))
+                .when(slotSpinner)
+                .spin();
+
+            mockMvc.perform(createRequest())
+                .andExpectAll(
+                    MockMvcResultMatchers.status().is(200),
+                    MockMvcResultMatchers.jsonPath("$.slots", Matchers.equalTo(List.of("BLACK", "GREEN", "YELLOW", "WHITE"))),
+                    MockMvcResultMatchers.jsonPath("$.outcome", Matchers.equalTo("FULL_HOUSE"))
+                );
+        }
+
+        @Test
+        void returnsExpectedResult_whenSmallPrize() throws Exception {
             final SlotSpinner slotSpinner = Mockito.mock();
 
             Mockito.doReturn(slotSpinner)
@@ -67,6 +87,26 @@ public class MachinesSpinsIntegrationTest {
                 .andExpectAll(
                     MockMvcResultMatchers.status().is(200),
                     MockMvcResultMatchers.jsonPath("$.slots", Matchers.equalTo(List.of("BLACK", "BLACK", "BLACK", "WHITE"))),
+                    MockMvcResultMatchers.jsonPath("$.outcome", Matchers.equalTo("SMALL_PRIZE"))
+                );
+        }
+
+        @Test
+        void returnsExpectedResult_whenLoss() throws Exception {
+            final SlotSpinner slotSpinner = Mockito.mock();
+
+            Mockito.doReturn(slotSpinner)
+                .when(slotSpinnerFactory)
+                .create(Mockito.any());
+
+            Mockito.doReturn(List.of("BLACK", "WHITE", "BLACK", "WHITE"))
+                .when(slotSpinner)
+                .spin();
+
+            mockMvc.perform(createRequest())
+                .andExpectAll(
+                    MockMvcResultMatchers.status().is(200),
+                    MockMvcResultMatchers.jsonPath("$.slots", Matchers.equalTo(List.of("BLACK", "WHITE", "BLACK", "WHITE"))),
                     MockMvcResultMatchers.jsonPath("$.outcome", Matchers.equalTo("LOSS"))
                 );
         }

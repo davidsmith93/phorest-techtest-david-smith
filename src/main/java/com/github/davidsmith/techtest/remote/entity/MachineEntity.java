@@ -18,6 +18,9 @@ public class MachineEntity extends PersistableEntity<Integer> {
     private Set<String> colours;
     private int numberOfSlots;
     private SpinType spinType;
+    private int floatInPence;
+    private int spinPriceInPence;
+    private int smallPrizeAdjacency;
 
     public enum SpinType {
         RANDOM

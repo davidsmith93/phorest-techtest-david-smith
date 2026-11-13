@@ -60,7 +60,7 @@ class SpinServiceTest {
 
             Mockito.doReturn(outcome)
                 .when(outcomeEvaluator)
-                .evaluate(slots);
+                .evaluate(machine, slots);
 
             Assertions.assertThat(spinService.create(MACHINE_ID))
                 .returns(slots, MachineSpinsResult::getSlots)

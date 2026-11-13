@@ -18,6 +18,12 @@ paths:
           type: number
           value: 1
         required: true
+      - name: x-user
+        in: header
+        schema:
+          type: number
+          value: 1
+        required: true
     post:
       requestBody:
         content:
@@ -57,7 +63,7 @@ components:
             - LOSS
         payoutInPence:
           type: number
-        balanceInPence:
+        remainingFloatInPence:
           type: number
         freeSpinsAwarded:
           type: number

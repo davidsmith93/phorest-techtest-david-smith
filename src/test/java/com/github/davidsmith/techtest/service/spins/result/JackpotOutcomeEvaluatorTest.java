@@ -4,6 +4,7 @@ import com.github.davidsmith.techtest.model.SpinOutcome;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -17,14 +18,14 @@ class JackpotOutcomeEvaluatorTest {
         @Test
         void returnsJackpot_whenAllSlotsMatch() {
             Assertions.assertThat(
-                jackpotOutcomeEvaluator.evaluate(List.of("MATCH", "MATCH", "MATCH", "MATCH"))
+                jackpotOutcomeEvaluator.evaluate(Mockito.mock(), List.of("MATCH", "MATCH", "MATCH", "MATCH"))
             ).isEqualTo(SpinOutcome.JACKPOT);
         }
 
         @Test
         void returnsLoss_whenAllSlotsDoNotMatch() {
             Assertions.assertThat(
-                jackpotOutcomeEvaluator.evaluate(List.of("MATCH", "MATCH", "MATCH", "match"))
+                jackpotOutcomeEvaluator.evaluate(Mockito.mock(), List.of("MATCH", "MATCH", "MATCH", "match"))
             ).isEqualTo(SpinOutcome.LOSS);
         }
     }
