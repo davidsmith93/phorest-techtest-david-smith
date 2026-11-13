@@ -23,13 +23,15 @@ class MachinesSpinsControllerTest {
     @InjectMocks
     private MachinesSpinsController machinesSpinsController;
 
+    private static final Integer MACHINE_ID = 1;
+
     @Nested
     class Crete {
         @Test
         void delegatesToUnderlyingService() {
-            machinesSpinsController.create();
+            machinesSpinsController.create(MACHINE_ID);
 
-            Mockito.verify(spinService).create();
+            Mockito.verify(spinService).create(MACHINE_ID);
         }
 
         @Test
@@ -38,9 +40,9 @@ class MachinesSpinsControllerTest {
 
             Mockito.doReturn(result)
                 .when(spinService)
-                .create();
+                .create(MACHINE_ID);
 
-            Assertions.assertThat(machinesSpinsController.create())
+            Assertions.assertThat(machinesSpinsController.create(MACHINE_ID))
                 .returns(HttpStatus.OK, ResponseEntity::getStatusCode)
                 .returns(result, HttpEntity::getBody);
         }

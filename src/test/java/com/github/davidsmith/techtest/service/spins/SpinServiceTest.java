@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class SpinServiceTest {
@@ -33,6 +34,8 @@ class SpinServiceTest {
     @InjectMocks
     SpinService spinService;
 
+    private static final Integer MACHINE_ID = 1;
+
     @Nested
     class Create {
         @Test
@@ -43,9 +46,9 @@ class SpinServiceTest {
             final List<String> slots = Mockito.mock();
             final SpinOutcome outcome = SpinOutcome.JACKPOT;
 
-            Mockito.doReturn(machine)
+            Mockito.doReturn(Optional.of(machine))
                 .when(machineRepository)
-                .get();
+                .findById(MACHINE_ID);
 
             Mockito.doReturn(slotSpinner)
                 .when(slotSpinnerFactory)
@@ -59,7 +62,7 @@ class SpinServiceTest {
                 .when(outcomeEvaluator)
                 .evaluate(slots);
 
-            Assertions.assertThat(spinService.create())
+            Assertions.assertThat(spinService.create(MACHINE_ID))
                 .returns(slots, MachineSpinsResult::getSlots)
                 .returns(outcome.name(), MachineSpinsResult::getOutcome);
         }

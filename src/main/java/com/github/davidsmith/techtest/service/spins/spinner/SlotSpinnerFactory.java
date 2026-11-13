@@ -1,6 +1,6 @@
 package com.github.davidsmith.techtest.service.spins.spinner;
 
-import com.github.davidsmith.techtest.exception.base.BadMachineException;
+import com.github.davidsmith.techtest.exception.BadMachineException;
 import com.github.davidsmith.techtest.remote.entity.MachineEntity;
 import org.springframework.stereotype.Component;
 

@@ -1,33 +1,20 @@
 package com.github.davidsmith.techtest.remote.repository;
 
 import com.github.davidsmith.techtest.remote.entity.MachineEntity;
+import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.jdbc.repository.support.SimpleJdbcRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Set;
 
-@Component
-public class MachineRepository {
+@Repository
+public interface MachineRepository extends CrudRepository<MachineEntity, Integer> {
 
-    private static final String BLACK = "BLACK";
-    private static final String WHITE = "WHITE";
-    private static final String GREEN = "GREEN";
-    private static final String YELLOW = "YELLOW";
-
-    private static final Set<String> COLOURS = Set.of(
-        BLACK,
-        WHITE,
-        GREEN,
-        YELLOW
-    );
-
-    private static final int NUMBER_OF_SLOTS = 4;
-
-    public MachineEntity get() {
-        return MachineEntity.builder()
-            .colours(COLOURS)
-            .numberOfSlots(NUMBER_OF_SLOTS)
-            .spinType(MachineEntity.SpinType.RANDOM)
-            .build();
-    }
+    @Query("SELECT * FROM FRUIT_MACHINE WHERE id = :id FOR UPDATE")
+    Optional<MachineEntity> findById(Integer id);
 
 }

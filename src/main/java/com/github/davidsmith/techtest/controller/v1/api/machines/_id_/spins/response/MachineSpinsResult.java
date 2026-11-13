@@ -12,4 +12,7 @@ import java.util.List;
 public class MachineSpinsResult {
     private List<String> slots;
     private String outcome;
+    private Integer payoutInPence;
+    private Integer balanceInPence;
+    private Integer freeSpinsAwarded;
 }

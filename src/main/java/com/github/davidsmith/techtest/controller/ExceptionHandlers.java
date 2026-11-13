@@ -2,6 +2,7 @@ package com.github.davidsmith.techtest.controller;
 
 import com.github.davidsmith.techtest.controller.model.ErrorResponse;
 import com.github.davidsmith.techtest.exception.base.BadRequestException;
+import com.github.davidsmith.techtest.exception.base.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -49,6 +50,24 @@ public class ExceptionHandlers {
         );
 
         log.warn("Handling BadRequestException", ex);
+
+        return errorResponse;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ErrorResponse handleNotFoundException(NotFoundException ex) {
+        final Collection<ErrorResponse.Error> errors = List.of(
+            new ErrorResponse.Error("not_found", ex.getError())
+        );
+
+        final ErrorResponse errorResponse = new ErrorResponse(
+            "error.not_found",
+            ex.getMessage(),
+            errors
+        );
+
+        log.warn("Handling NotFoundException", ex);
 
         return errorResponse;
     }
