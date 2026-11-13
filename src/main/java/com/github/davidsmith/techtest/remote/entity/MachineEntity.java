@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Data
 @Builder
-@Table("FRUIT_MACHINE")
+@Table("fruit_machines")
 @EqualsAndHashCode(callSuper = true)
 public class MachineEntity extends PersistableEntity<Integer> {
     @Id

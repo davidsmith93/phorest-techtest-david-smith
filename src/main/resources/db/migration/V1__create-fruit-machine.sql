@@ -1,6 +1,6 @@
 CREATE TYPE fruit_machine_type AS ENUM ('RANDOM');
 
-CREATE TABLE fruit_machine (
+CREATE TABLE fruit_machines (
     id BIGINT PRIMARY KEY,
     colours TEXT[] NOT NULL,
     number_of_slots SMALLINT NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE fruit_machine (
     small_prize_adjacency INT NOT NULL
 );
 
-INSERT INTO fruit_machine (id, colours, number_of_slots, spin_type, float_in_pence, spin_price_in_pence, small_prize_adjacency)
+INSERT INTO fruit_machines (id, colours, number_of_slots, spin_type, float_in_pence, spin_price_in_pence, small_prize_adjacency)
 VALUES (
     1,
     array['BLACK', 'WHITE', 'GREEN', 'YELLOW'],

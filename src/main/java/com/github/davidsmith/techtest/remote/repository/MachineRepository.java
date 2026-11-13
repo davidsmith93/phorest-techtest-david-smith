@@ -14,7 +14,7 @@ import java.util.Set;
 @Repository
 public interface MachineRepository extends CrudRepository<MachineEntity, Integer> {
 
-    @Query("SELECT * FROM FRUIT_MACHINE WHERE id = :id FOR UPDATE")
+    @Query("SELECT * FROM fruit_machines WHERE id = :id FOR UPDATE")
     Optional<MachineEntity> findById(Integer id);
 
 }
