@@ -1,0 +1,5 @@
+CREATE TABLE users (
+    id BIGINT PRIMARY KEY
+);
+
+INSERT INTO users (id) VALUES (1);
