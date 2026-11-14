@@ -5,6 +5,74 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
+  /api/machines:
+    parameters:
+      - name: x-version
+        in: header
+        schema:
+          type: number
+          value: 1
+        required: true
+    post:
+      requestBody:
+        content:
+          application/json:
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMachineRequest'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/machines/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: x-version
+        in: header
+        schema:
+          type: number
+          value: 1
+        required: true
+    get:
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveMachineResponse'
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMachineRequest'
+      responses:
+        "204":
+          description: No content
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /api/machines/{id}/spins:
     parameters:
       - name: id
@@ -25,9 +93,6 @@ paths:
           value: 1
         required: true
     post:
-      requestBody:
-        content:
-          application/json:
       responses:
         "200":
           description: A successful spin including the column results and the outcome
@@ -41,8 +106,82 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    CreateMachineRequest:
+      properties:
+        colours:
+          type: array
+          minimum: 2
+          description: A case insensitive collection. Duplicate, blank and null values will be removed.
+          items:
+            type: string
+        numberOfSlots:
+          type: integer
+          minimum: 2
+        floatInPence:
+          type: integer
+          minimum: 1
+        spinPriceInPence:
+          type: integer
+          minimum: 1
+        smallPrizeAdjacency:
+          decription: Must not be greater than or equal to numberOfSlots
+          type: integer
+          minimum: 1
+    CreateMachineResponse:
+      propertiess:
+        id:
+          type: integer
+    RetrieveMachineResponse:
+      properties:
+        id:
+          type: integer
+        colours:
+          type: array
+          items:
+            type: string
+        numberOfSlots:
+          type: integer
+        floatInPence:
+          type: integer
+        spinPriceInPence:
+          type: integer
+        smallPrizeAdjacency:
+          type: integer
+    UpdateMachineRequest:
+      properties:
+        colours:
+          type: array
+          minimum: 2
+          description: A case insensitive collection. Duplicate, blank and null values will be removed.
+          items:
+            type: string
+        numberOfSlots:
+          type: integer
+          minimum: 2
+        floatInPence:
+          type: integer
+          minimum: 1
+        spinPriceInPence:
+          type: integer
+          minimum: 1
+        smallPrizeAdjacency:
+          decription: Must not be greater than or equal to numberOfSlots
+          type: integer
+          minimum: 1
     MachineSpinResult:
       properties:
         slots:

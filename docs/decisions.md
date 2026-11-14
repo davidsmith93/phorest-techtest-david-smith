@@ -45,3 +45,13 @@ Phase 3 will contain the following:
 - Endpoints to create, configure and view a fruit machine
 
 ### Assumptions
+- The endpoints for create, configure and viewing a fruit machine will follow POST, PUT and GET respectively.
+  - PUT will be used opposed to PATCH for updating configuration as a PATCH should mean partial updates, which would make the implementation much more complex. For a production system, I would rather use PATCH in this case.
+- Validations for the machine will be as follows:
+  - Float has to be above 0
+  - Spin Price has to be above 0
+  - Number of columns has to be above 1
+  - Number of adjacency for small prize has to be above 0 and cannot exceed or equal the number of columns
+  - Number of colours has to be above 1
+  - Each colour must be unique and will be saved in uppercase
+- When PUT or GET for a missing machine, 404 will be returned
