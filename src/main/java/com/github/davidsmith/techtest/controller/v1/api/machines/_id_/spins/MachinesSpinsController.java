@@ -23,8 +23,8 @@ public class MachinesSpinsController {
         @PathVariable Integer machineId,
         @RequestHeader("x-user") Integer userId
     ) {
-        MDC.put("machine", "%d".formatted(machineId));
-        MDC.put("user", "%d".formatted(userId));
+        MDC.put("machine", machineId.toString());
+        MDC.put("user", userId.toString());
 
         return ResponseEntity.ok(spinService.create(machineId, userId));
     }

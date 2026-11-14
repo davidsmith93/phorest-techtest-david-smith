@@ -76,7 +76,7 @@ public class SpinService {
     private MachineEntity retrieveMachineEntity(Integer machineId) {
         log.debug("Attempting to retrieve fruit_machine with id {}", machineId);
 
-        return machineRepository.findById(machineId)
+        return machineRepository.findByIdForUpdate(machineId)
             .orElseThrow(() -> new MachineNotFoundException(
                 "Unable to spin",
                 "Machine could not be found with id %d".formatted(machineId)

@@ -70,7 +70,7 @@ class SpinServiceTest {
 
             Mockito.doReturn(0).when(machine).getFloatInPence();
             Mockito.doReturn(1).when(userSpins).getFreeSpins();
-            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findById(MACHINE_ID);
+            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findByIdForUpdate(MACHINE_ID);
             Mockito.doReturn(Optional.of(userSpins))
                 .when(userSpinsRepository)
                 .findById(new UserSpinsEntity.Identifier(USER_ID, MACHINE_ID));
@@ -88,7 +88,7 @@ class SpinServiceTest {
             final SpinOutcome outcome = SpinOutcome.JACKPOT;
             final SpinOutcomeResult spinOutcomeResult = Mockito.mock();
 
-            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findById(MACHINE_ID);
+            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findByIdForUpdate(MACHINE_ID);
             Mockito.doReturn(slotSpinner).when(slotSpinnerFactory).create(machine);
             Mockito.doReturn(slots).when(slotSpinner).spin();
             Mockito.doReturn(outcome).when(outcomeEvaluator).evaluate(machine, slots);
@@ -117,7 +117,7 @@ class SpinServiceTest {
 
             Mockito.doReturn(10000).when(machine).getFloatInPence();
             Mockito.doReturn(1).when(userSpins).getFreeSpins();
-            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findById(MACHINE_ID);
+            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findByIdForUpdate(MACHINE_ID);
             Mockito.doReturn(Optional.of(userSpins))
                 .when(userSpinsRepository)
                 .findById(new UserSpinsEntity.Identifier(USER_ID, MACHINE_ID));
@@ -146,7 +146,7 @@ class SpinServiceTest {
             final SpinOutcome outcome = SpinOutcome.JACKPOT;
             final SpinOutcomeResult spinOutcomeResult = Mockito.mock();
 
-            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findById(MACHINE_ID);
+            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findByIdForUpdate(MACHINE_ID);
             Mockito.doReturn(slotSpinner).when(slotSpinnerFactory).create(machine);
             Mockito.doReturn(slots).when(slotSpinner).spin();
             Mockito.doReturn(outcome).when(outcomeEvaluator).evaluate(machine, slots);
@@ -170,7 +170,7 @@ class SpinServiceTest {
             final SpinOutcome outcome = SpinOutcome.JACKPOT;
             final SpinOutcomeResult spinOutcomeResult = Mockito.mock();
 
-            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findById(MACHINE_ID);
+            Mockito.doReturn(Optional.of(machine)).when(machineRepository).findByIdForUpdate(MACHINE_ID);
             Mockito.doReturn(Optional.of(user)).when(userRepository).findById(USER_ID);
             Mockito.doReturn(Optional.of(userSpins))
                 .when(userSpinsRepository)

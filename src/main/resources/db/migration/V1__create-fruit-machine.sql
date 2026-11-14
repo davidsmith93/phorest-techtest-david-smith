@@ -1,5 +1,5 @@
 CREATE TABLE fruit_machines (
-    id SERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     colours TEXT[] NOT NULL,
     number_of_slots SMALLINT NOT NULL,
     spin_type VARCHAR NOT NULL,
