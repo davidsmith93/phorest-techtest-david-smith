@@ -41,7 +41,7 @@ Phase 2 will contain the following:
 
 ## Phase 3
 Phase 3 will contain the following:
-- A docker-compose with a standalone PostgreSql database
+- A docker-compose with a standalone PostgreSql database and the server
 - Endpoints to create, configure and view a fruit machine
 
 ### Assumptions

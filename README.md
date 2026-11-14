@@ -15,25 +15,26 @@ sh mvnw clean verify
 
 ### Server
 #### Maven
+This will run an in memory postgresql database using test containers.
 ```shell
 sh mvnw spring-boot:run
 ```
 
 #### Docker
-When running by docker ensure the application has been build first:
+This will run a dedicated postgresql database on port `5432`.
+When running by docker ensure the application has been built first:
 ```shell
-sh mvnw clean compile jar:jar spring-boot:repackage
-docker build . -t phorest-techtest/david-smith
-docker run -p 8080:8080 phorest-techtest/david-smith
+sh mvnw clean verify
+docker compose up
 ```
 
 ### Instructions for endpoints
 <TODO>
 
 #### Viewing the database
-The database can be viewed at http://localhost:8080/h2-console and accessed using the following:
-- JDBC URL: `jdbc:h2:mem:tech-test`
-- Username: `username`
+The database can be viewed using the following:
+- JDBC URL: `jdbc:postgresql://postgresql:5432/fruitmachine`
+- Username: `admin`
 - Password: `password`
 
 ## Future iterations

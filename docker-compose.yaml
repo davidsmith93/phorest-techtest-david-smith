@@ -1,0 +1,32 @@
+services:
+  postgresql:
+    image: postgres:18.7-alpine
+    container_name: postgresql
+    environment:
+      POSTGRES_DB: fruitmachine
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "admin", "-d", "fruitmachine"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - fruitmachine-net
+
+  server:
+    image: phorest-techtest-david-smith:latest
+    container_name: server
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    networks:
+      - fruitmachine-net
+
+networks:
+  fruitmachine-net:
+    driver: bridge

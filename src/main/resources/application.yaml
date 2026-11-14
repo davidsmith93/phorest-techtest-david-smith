@@ -2,12 +2,6 @@ spring:
   application:
     name: tech-test
   datasource:
-    url: jdbc:tc:postgresql:9.5.8:///techtest;
+    url: jdbc:tc:postgresql:18.7-alpine:///fruitmachine;
     username: username
     password: password
-
-# H2 Console - visit http://localhost:8080/h2-console
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
