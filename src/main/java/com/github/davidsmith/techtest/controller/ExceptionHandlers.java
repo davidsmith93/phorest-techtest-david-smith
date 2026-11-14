@@ -2,6 +2,7 @@ package com.github.davidsmith.techtest.controller;
 
 import com.github.davidsmith.techtest.controller.model.ErrorResponse;
 import com.github.davidsmith.techtest.exception.base.BadRequestException;
+import com.github.davidsmith.techtest.exception.base.InternalServerErrorException;
 import com.github.davidsmith.techtest.exception.base.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -68,6 +69,21 @@ public class ExceptionHandlers {
         );
 
         log.warn("Handling NotFoundException", ex);
+
+        return errorResponse;
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ErrorResponse handleInternalServerErrorException(InternalServerErrorException ex) {
+
+        final ErrorResponse errorResponse = new ErrorResponse(
+            "error.internal_server_error",
+            ex.getMessage(),
+            null
+        );
+
+        log.warn("Handling InternalServerErrorException", ex);
 
         return errorResponse;
     }

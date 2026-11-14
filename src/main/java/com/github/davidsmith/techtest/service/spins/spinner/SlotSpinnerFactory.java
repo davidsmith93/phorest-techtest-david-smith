@@ -11,12 +11,12 @@ import java.util.ArrayList;
 public class SlotSpinnerFactory {
     public SlotSpinner create(MachineEntity machine) {
         return switch (machine.getSpinType()) {
-            case null -> throw new BadMachineException("Unsupported machine", "Machine must be of type RANDOM");
             case RANDOM -> new RandomSlotSpinner(
                 new ArrayList<>(machine.getColours()),
                 machine.getNumberOfSlots(),
                 new SecureRandom()
             );
+            case null -> throw new BadMachineException("Chosen machine has an unsupported spin type");
         };
     }
 }
