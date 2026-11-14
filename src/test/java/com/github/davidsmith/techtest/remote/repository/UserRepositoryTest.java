@@ -19,10 +19,22 @@ class UserRepositoryTest {
         @Test
         @Transactional
         void returnsExpected() {
-            Assertions.assertThat(userRepository.findById(1))
+            final UserEntity user = createUser();
+
+            Assertions.assertThat(userRepository.findById(user.getId()))
                 .isPresent()
                 .get()
-                .returns(1, UserEntity::getId);
+                .returns(user.getId(), UserEntity::getId);
+        }
+
+        private UserEntity createUser() {
+            final UserEntity user = UserEntity.builder()
+                .id(1)
+                .build();
+
+            user.setNewEntity(true);
+
+            return userRepository.save(user);
         }
     }
 

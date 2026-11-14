@@ -4,12 +4,11 @@ import com.github.davidsmith.techtest.model.SpinContext;
 import com.github.davidsmith.techtest.model.SpinOutcome;
 import com.github.davidsmith.techtest.model.SpinOutcomeResult;
 import com.github.davidsmith.techtest.remote.entity.MachineEntity;
-import com.github.davidsmith.techtest.remote.repository.MachineRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
-@RequiredArgsConstructor
+@Component
 public class JackpotOutcomeStrategy implements OutcomeStrategy {
 
     @Override

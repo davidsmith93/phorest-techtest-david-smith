@@ -2,6 +2,8 @@ package com.github.davidsmith.techtest.remote.entity;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +19,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class MachineEntity extends PersistableEntity<Integer> {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Set<String> colours;
     private int numberOfSlots;

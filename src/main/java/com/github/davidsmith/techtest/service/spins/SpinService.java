@@ -3,13 +3,16 @@ package com.github.davidsmith.techtest.service.spins;
 import com.github.davidsmith.techtest.controller.v1.api.machines._id_.spins.response.MachineSpinsResult;
 import com.github.davidsmith.techtest.exception.EmptyMachineException;
 import com.github.davidsmith.techtest.exception.MachineNotFoundException;
+import com.github.davidsmith.techtest.model.SpinContext;
 import com.github.davidsmith.techtest.model.SpinOutcome;
+import com.github.davidsmith.techtest.model.SpinOutcomeResult;
 import com.github.davidsmith.techtest.remote.entity.MachineEntity;
 import com.github.davidsmith.techtest.remote.entity.UserEntity;
 import com.github.davidsmith.techtest.remote.entity.UserSpinsEntity;
 import com.github.davidsmith.techtest.remote.repository.MachineRepository;
 import com.github.davidsmith.techtest.remote.repository.UserRepository;
 import com.github.davidsmith.techtest.remote.repository.UserSpinsRepository;
+import com.github.davidsmith.techtest.service.spins.outcome.OutcomeStrategyDelegator;
 import com.github.davidsmith.techtest.service.spins.result.OutcomeEvaluator;
 import com.github.davidsmith.techtest.service.spins.spinner.SlotSpinner;
 import com.github.davidsmith.techtest.service.spins.spinner.SlotSpinnerFactory;
@@ -30,6 +33,7 @@ public class SpinService {
     private final UserSpinsRepository userSpinsRepository;
     private final SlotSpinnerFactory slotSpinnerFactory;
     private final OutcomeEvaluator compositeOutcomeEvaluator;
+    private final OutcomeStrategyDelegator outcomeStrategyDelegator;
 
     @Transactional
     public MachineSpinsResult create(Integer machineId, Integer userId) {
@@ -46,6 +50,13 @@ public class SpinService {
 
         final List<String> slots = slotSpinner.spin();
         final SpinOutcome outcome = compositeOutcomeEvaluator.evaluate(machine, slots);
+        final SpinOutcomeResult result = outcomeStrategyDelegator.delegate(
+            SpinContext.builder()
+                .spinOutcome(outcome)
+                .machine(machine)
+                .userSpins(userSpins)
+                .build()
+        );
 
         userRepository.save(user);
         machineRepository.save(machine);
@@ -56,6 +67,9 @@ public class SpinService {
         return MachineSpinsResult.builder()
             .slots(slots)
             .outcome(outcome.name())
+            .freeSpinsAwarded(result.getFreeSpinsAwarded())
+            .payoutInPence(result.getPayoutInPence())
+            .remainingFloatInPence(result.getRemainingFloatInPence())
             .build();
     }
 

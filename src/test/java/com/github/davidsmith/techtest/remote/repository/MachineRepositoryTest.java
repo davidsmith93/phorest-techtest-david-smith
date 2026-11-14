@@ -21,11 +21,28 @@ class MachineRepositoryTest {
         @Test
         @Transactional
         void returnsExpected() {
-            Assertions.assertThat(machineRepository.findById(1))
+            MachineEntity machine = createMachine();
+
+            Assertions.assertThat(machineRepository.findById(machine.getId()))
                 .isPresent()
                 .get()
                 .returns(4, MachineEntity::getNumberOfSlots)
                 .returns(Set.of("BLACK", "WHITE", "GREEN", "YELLOW"), MachineEntity::getColours);
+        }
+
+        private MachineEntity createMachine() {
+            final MachineEntity machine = MachineEntity.builder()
+                .floatInPence(10000)
+                .spinPriceInPence(100)
+                .numberOfSlots(4)
+                .colours(Set.of("BLACK", "WHITE", "GREEN", "YELLOW"))
+                .smallPrizeAdjacency(2)
+                .spinType(MachineEntity.SpinType.RANDOM)
+                .build();
+
+            machine.setNewEntity(true);
+
+            return machineRepository.save(machine);
         }
     }
 
