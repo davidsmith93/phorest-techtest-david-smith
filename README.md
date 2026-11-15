@@ -3,7 +3,7 @@
 - [Problem Specification](docs/spec.md)
 - [Decision Log](docs/decisions.md)
 - [OpenApi Specification](docs/openapi.yaml)
-- [AI Usage](docs/ai)
+- [AI Usage](docs/ai/overview.md)
 
 ## How to Run
 ### Requirements
@@ -100,3 +100,5 @@ The database can be viewed using the following:
 - Missing code coverage
 - Missing complete test suite for request validation
 - Ideally would like to have a series of converters to remove conversion logic from service layers
+- Database url, username and password should all be provided to the application-docker.yaml, opposed to being hard coded
+  - This means the application can use the same config files across multiple environments with values injected from secrets
