@@ -38,6 +38,17 @@ Phase 2 will contain the following:
     - All colours must be present
 - When multiple payouts are achieved, only the first is taken into consideration, based on the ordering of JACKPOT > FULL_HOUSE > SMALL_PRIZE
 - When a request to spin is made using a free spin, and the machine is empty, validation kicks in to fail the call
+- A users free spins are stored against a machine. This prevents low stakes spins allowing high stake spins
+
+### Differences to the generated implementation plan by AI
+- JPA was already configured for the repository and has been available since the beginning so nothing had to be added.
+- A users endpoint was ignored as this information should live in a separate service and have been authenticated before coming to this one.
+- Doesn't mention anything about storing spin information for users to machines.
+- Seeding the service with a dedicated machine was removed to facilitate step 3.
+- Spin orchestration shouldn't fail when a new user is seen.
+  - In this case since user information lives outside this service, we just have a shallow version which is created when the user is first seen by the service
+  - The same goes for spin details for the machine
+- `PayoutStrategy` was not reworked and a new dedicated layer was created to handle payouts
 
 ## Phase 3
 Phase 3 will contain the following:
